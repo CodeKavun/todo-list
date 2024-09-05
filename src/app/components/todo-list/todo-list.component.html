@@ -1,0 +1,12 @@
+<h1>ToDo List</h1>
+<ul>
+    <li *ngFor="let todo of todos">
+        <h3>{{todo.title}}</h3>
+        <i>{{todo.daysToComplete}} days</i>
+        <p>{{todo.description}}</p>
+        <span>Priority: {{todo.priority}}</span><br>
+        <b><i>{{todo.isDone}}</i></b><br>
+        <a href="/todos/edit/{{todo.id}}">Edit</a>
+        <button (click)="deleteToDo(todo.id)">Delete</button>
+    </li>
+</ul>
