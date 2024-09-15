@@ -1,0 +1,14 @@
+
+.project-list {
+    list-style-type: none;
+}
+
+.project-list li {
+    border-bottom: 1px dashed #9b9b9b;
+    margin-right: 50px;
+}
+
+.project-list li .project-link {
+    text-decoration: none;
+    color: #7a7a7a;
+}

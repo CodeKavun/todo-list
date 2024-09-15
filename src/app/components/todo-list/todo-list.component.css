@@ -1,0 +1,23 @@
+
+.todo-list li {
+    border-bottom: 1px dashed #9b9b9b;
+    margin-right: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.todo-list li .todo-list-controls a {
+    margin-right: 10px;
+    color: #0f68b6;
+    font-size: 18px;
+}
+
+.todo-list li .todo-list-controls button {
+    background-color: #b60f0f;
+    color: white;
+    border: none;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
