@@ -14,14 +14,14 @@ export class JsonStorage {
         return JsonStorage.instance;
     }
 
-    save(todo: ToDo[]): void {
-        const data = JSON.stringify(todo);
-        localStorage.setItem("todos", data);
+    save(data: any[], key: string): void {
+        const json = JSON.stringify(data);
+        localStorage.setItem(key, json);
     }
 
-    load(): ToDo[] {
-        const data: string | null = localStorage.getItem('todos');
-        if (data == null) return TODOS;
+    load(key: string, dataOnNull: any[]): ToDo[] {
+        const data: string | null = localStorage.getItem(key);
+        if (data == null) return dataOnNull;
 
         return JSON.parse(data || '[]');
     }

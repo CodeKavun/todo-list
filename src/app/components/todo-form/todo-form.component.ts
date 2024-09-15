@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './todo-form.component.css'
 })
 export class TodoFormComponent {
-  @Input() todo: ToDo = new ToDo(0, '', '', 0, 0);
+  @Input() todo: ToDo = new ToDo(0, 1, '', '', 0, 0);
 
   constructor(
     private todoService: ToDoService,
@@ -22,7 +22,7 @@ export class TodoFormComponent {
   ) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('todo_id');
 
     if (id) {
       const existingTodo = this.todoService.getToDo(+id);
@@ -37,11 +37,17 @@ export class TodoFormComponent {
       this.todoService.updateToDo(this.todo);
     } else {
       const newId = this.todoService.getToDos().length + 1;
+      const projectId = this.route.snapshot.paramMap.get('proj_id');
 
       this.todo.id = newId;
+      if (projectId) this.todo.projectId = +projectId;
       this.todoService.addToDo(this.todo);
     }
 
-    this.router.navigate(['/todos']);
+    this.router.navigate([`projects/${this.todo.projectId}/todos`]);
+  }
+
+  getProjectId() {
+    return this.route.snapshot.paramMap.get('proj_id');
   }
 }

@@ -1,0 +1,10 @@
+<nav>
+    <a href="projects/create">Create project</a>
+</nav>
+<ul>
+    <li *ngFor="let project of projects">
+        <a href="projects/{{project.id}}/todos">
+            <h2>{{project.title}}</h2>
+        </a>
+    </li>
+</ul>

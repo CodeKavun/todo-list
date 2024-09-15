@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
 import { ToDo } from '../models/to-do';
-import { TODOS } from './mock-todo';
 import { JsonStorage } from '../utils/json-storage';
+import { TODOS } from './mock-todo';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ToDoService {
-  private todos: ToDo[] = JsonStorage.getInstance().load();
+  private todos: ToDo[] = JsonStorage.getInstance().load('todos', TODOS);
 
   constructor() { }
 
   getToDos(): ToDo[] {
     return this.todos.sort((a, b) => b.priority - a.priority);
+  }
+
+  getToDosInProject(projectId: number): ToDo[] {
+    return this.getToDos().filter(todo => todo.projectId === projectId);
   }
 
   getToDo(id: number): ToDo | undefined {
@@ -21,7 +25,7 @@ export class ToDoService {
 
   addToDo(todo: ToDo): void {
     this.todos.push(todo);
-    JsonStorage.getInstance().save(this.todos);
+    JsonStorage.getInstance().save(this.todos, 'todos');
   }
 
   updateToDo(updatedToDo: ToDo): void {
@@ -31,11 +35,11 @@ export class ToDoService {
       this.todos[index] = updatedToDo;
     }
 
-    JsonStorage.getInstance().save(this.todos);
+    JsonStorage.getInstance().save(this.todos, 'todos');
   }
 
   deleteToDo(id: number): void {
     this.todos = this.todos.filter(todo => todo.id !== id);
-    JsonStorage.getInstance().save(this.todos);
+    JsonStorage.getInstance().save(this.todos, 'todos');
   }
 }
