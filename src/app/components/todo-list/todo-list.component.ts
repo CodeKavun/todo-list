@@ -34,4 +34,10 @@ export class TodoListComponent {
       this.todos = this.todoService.getToDosInProject(+this.projectId);
     }
   }
+
+  markAsDone(id: number, isCurrentlyDone: boolean): void {
+    if (this.projectId) {
+      this.todoService.markAsDone(id, !isCurrentlyDone);
+    }
+  }
 }

@@ -38,6 +38,15 @@ export class ToDoService {
     JsonStorage.getInstance().save(this.todos, 'todos');
   }
 
+  markAsDone(id: number, done: boolean): void {
+    const doneTodo = this.getToDo(id);
+    
+    if (doneTodo) {
+      doneTodo.isDone = done;
+      this.updateToDo(doneTodo);
+    }
+  }
+
   deleteToDo(id: number): void {
     this.todos = this.todos.filter(todo => todo.id !== id);
     JsonStorage.getInstance().save(this.todos, 'todos');

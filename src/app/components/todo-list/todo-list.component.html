@@ -6,11 +6,11 @@
 <div *ngIf="todos" class="todo-list">
     <ul>
         <li *ngFor="let todo of todos">
+            <input type="checkbox" name="todo-list-is-done" class="todo-list-is-done" [checked]="todo.isDone" (change)="markAsDone(todo.id, todo.isDone)"><br>
             <h3 class="todo-list-title">{{todo.title}}</h3>
             <i class="todo-list-days">{{todo.daysToComplete}} days</i>
             <p class="todo-list-desc">{{todo.description}}</p>
             <span class="todo-list-prior">Priority: {{todo.priority}}</span><br>
-            <b class="todo-list-isdone">Is Done: <i>{{todo.isDone}}</i></b><br>
             <div class="todo-list-controls">
                 <a href="projects/{{projectId}}/todos/edit/{{todo.id}}">Edit</a>
                 <button (click)="deleteToDo(todo.id)">Delete</button>

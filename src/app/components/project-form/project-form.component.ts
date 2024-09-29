@@ -20,9 +20,20 @@ export class ProjectFormComponent {
   ) { }
 
   onCreate() {
-    this.project.id = this.projectService.getProjects().length + 1;
+    this.project.id = this.getNextId();
     this.projectService.addProject(this.project);
 
     this.router.navigate(['projects/']);
+  }
+
+  private getNextId(): number {
+    const projects = this.projectService.getProjects();
+    let max = projects[0].id;
+
+    projects.forEach(element => {
+      if (element.id > max) max = element.id;
+    });
+
+    return max + 1;
   }
 }

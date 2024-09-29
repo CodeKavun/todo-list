@@ -13,6 +13,11 @@
     font-size: 18px;
 }
 
+.todo-list li .todo-list-is-done {
+    width: 40px;
+    height: 40px;
+}
+
 .todo-list li .todo-list-controls button {
     background-color: #b60f0f;
     color: white;

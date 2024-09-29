@@ -36,7 +36,8 @@ export class TodoFormComponent {
     if (this.todo.id) {
       this.todoService.updateToDo(this.todo);
     } else {
-      const newId = this.todoService.getToDos().length + 1;
+      const newId = this.getNextId();
+
       const projectId = this.route.snapshot.paramMap.get('proj_id');
 
       this.todo.id = newId;
@@ -49,5 +50,16 @@ export class TodoFormComponent {
 
   getProjectId() {
     return this.route.snapshot.paramMap.get('proj_id');
+  }
+
+  private getNextId(): number {
+    const todos = this.todoService.getToDos();
+    let max = todos[0].id;
+
+    todos.forEach(element => {
+      if (element.id > max) max = element.id;
+    });
+
+    return max + 1;
   }
 }

@@ -7,5 +7,8 @@
         <a href="projects/{{project.id}}/todos" class="project-link">
             <h2>{{project.title}}</h2>
         </a>
+        <div class="project-list-controls">
+            <button (click)="deleteProject(project.id)">Delete</button>
+        </div>
     </li>
 </ul>
